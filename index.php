@@ -1,8 +1,13 @@
 <?php
-
 require('./myConnect/connect.php');
 
 header("content-type:text/html;charset=utf-8");
+
+$num = $_GET['num'];
+
+
+
+
 
 //获取所有的列表
 $sqlall = "select * from list order by id desc";
@@ -33,7 +38,15 @@ while($rowone = mysql_fetch_assoc($resone)){
     $rowsone[] = $rowone;
 }
 
+$myrow = $rows;
 
+if($num == 0){
+    $myrow = $rowszero;
+}else if($num == 1){
+    $myrow = $rowsone;
+}else if($num == 2){
+    $myrow = $rows;
+}
 //var_dump($rows);
 ?>
 
@@ -80,7 +93,7 @@ while($rowone = mysql_fetch_assoc($resone)){
                 <div class="bottom-list">
                     <ul class="content-list">
                             
-                        <?php foreach($rows as $k=>$v):?>
+                        <?php foreach($myrow as $k=>$v):?>
                             <li>
                                 <a href="./admin/changeiscom.php?id=<?php echo $v['id'];?>"> <img onclick="changethis(<?php echo $v['id'] ?>,this)" class="left" src="./img/c0.png"><a>
                                 <p id = <?php echo $v['id'] ?> class="my_p"><?php echo $v['content'] ?></p>
@@ -93,9 +106,9 @@ while($rowone = mysql_fetch_assoc($resone)){
                         <a href="./admin/delateCom.php"><div class="list-bottom-right" id = "clear_completed">Clear completed</div>
                         <div></a>
                             <ul>
-                                <li>Completed</li>
-                                <li>Active</li>
-                                <li>All</li>
+                                <a href="./admin/switch.php?num=1"><li>Completed</li></a>
+                                <a href="./admin/switch.php?num=0"><li>Active</li></a>
+                                <a href="./admin/switch.php?num=2"><li>All</li></a>
                             </ul>
                         </div>
 
