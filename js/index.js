@@ -14,21 +14,15 @@ function select(){
 }
 
 //下面的每一项
-function changethis(id,isCom,obj){
+function changethis(id,obj){
 	if(obj.src.indexOf("c1") == -1){
         obj.src = "./img/c1.png";
         for(var i = 0,len = my_p.length;i <= len;i++){
         		if(my_p[i].id == id){
-        			
-
-        			
-                       my_p[i].style.textDecoration = "line-through";
-                       my_p[i].style.color = "rgb(217,217,217)";
-                    
+                   my_p[i].style.textDecoration = "line-through";
+                   my_p[i].style.color = "rgb(217,217,217)";
                    
                    
-        		
-
         		}
         }
     }else{

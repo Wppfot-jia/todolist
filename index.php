@@ -4,13 +4,35 @@ require('./myConnect/connect.php');
 
 header("content-type:text/html;charset=utf-8");
 
-$sql = "select * from list order by id desc";
+//获取所有的列表
+$sqlall = "select * from list order by id desc";
   
-$res = mysql_query($sql);
+$resall = mysql_query($sqlall);
 
-while($row = mysql_fetch_assoc($res)){
+while($row = mysql_fetch_assoc($resall)){
     $rows[] = $row;
 }
+
+//获取未完成的列表
+$sqlzero = "select * from list where isCom = 0 order by id desc";
+
+$reszero = mysql_query($sqlzero);
+
+$total = mysql_num_rows($reszero);
+
+while($rowzero = mysql_fetch_assoc($reszero)){
+    $rowszero[] = $rowzero;
+}
+
+//获取已完成的列表
+$sqlone = "select * from list where isCom = 1 order by id desc";
+
+$resone = mysql_query($sqlone);
+
+while($rowone = mysql_fetch_assoc($resone)){
+    $rowsone[] = $rowone;
+}
+
 
 //var_dump($rows);
 ?>
@@ -60,16 +82,16 @@ while($row = mysql_fetch_assoc($res)){
                             
                         <?php foreach($rows as $k=>$v):?>
                             <li>
-                                <img onclick="changethis(<?php echo $v['id'] ?>,<?php echo $v['isCom'] ?>,this)" class="left" src="./img/c0.png">
+                                <a href="./admin/changeiscom.php?id=<?php echo $v['id'];?>"> <img onclick="changethis(<?php echo $v['id'] ?>,this)" class="left" src="./img/c0.png"><a>
                                 <p id = <?php echo $v['id'] ?> class="my_p"><?php echo $v['content'] ?></p>
                             </li>
                         <?php endforeach;?>
                           
                     </ul>
                     <div class="list-bottom">
-                        <div class="list-bottom-left">3 item left</div>
-                        <div class="list-bottom-right" id = "clear_completed">Clear completed</div>
-                        <div>
+                        <div class="list-bottom-left"><?php echo $total ?> item left</div>
+                        <a href="./admin/delateCom.php"><div class="list-bottom-right" id = "clear_completed">Clear completed</div>
+                        <div></a>
                             <ul>
                                 <li>Completed</li>
                                 <li>Active</li>
