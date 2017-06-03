@@ -9,6 +9,8 @@
 
     $res = mysql_query($sql);
 
+    echo "<script>window.location.href='../index.php';</script>";
+
     
 
 
