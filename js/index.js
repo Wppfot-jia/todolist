@@ -22,7 +22,6 @@ function changethis(id,obj){
                    my_p[i].style.textDecoration = "line-through";
                    my_p[i].style.color = "rgb(217,217,217)";
                    
-                   
         		}
         }
     }else{
